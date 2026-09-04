@@ -1,0 +1,154 @@
+import java.util.Scanner;
+
+public class StudentManagementSystem {
+
+    static int[] studentId = new int[100];
+    static String[] studentName = new String[100];
+    static double[] studentMark = new double[100];
+
+    static int count = 0;
+
+    static Scanner sc = new Scanner(System.in);
+
+    // Add Student
+    static void addStudent() {
+
+        System.out.print("Enter Student ID: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        // Check duplicate ID
+        for (int i = 0; i < count; i++) {
+
+            if (studentId[i] == id) {
+                System.out.println("Student ID already exists!");
+                return;
+            }
+        }
+
+        System.out.print("Enter Student Name: ");
+        String name = sc.nextLine();
+
+        System.out.print("Enter Student Mark: ");
+        double mark = sc.nextDouble();
+
+        studentId[count] = id;
+        studentName[count] = name;
+        studentMark[count] = mark;
+
+        count++;
+
+        System.out.println("Student added successfully!");
+    }
+
+    // Search Student
+    static void searchStudent() {
+
+        System.out.print("Enter Student ID to search: ");
+        int id = sc.nextInt();
+
+        for (int i = 0; i < count; i++) {
+
+            if (studentId[i] == id) {
+
+                System.out.println("\nStudent Found!");
+                System.out.println("ID   : " + studentId[i]);
+                System.out.println("Name : " + studentName[i]);
+                System.out.println("Mark : " + studentMark[i]);
+
+                return;
+            }
+        }
+
+        System.out.println("Student ID not found!");
+    }
+
+    // Update Student
+    static void updateStudent() {
+
+        System.out.print("Enter Student ID to update: ");
+        int id = sc.nextInt();
+        sc.nextLine();
+
+        for (int i = 0; i < count; i++) {
+
+            if (studentId[i] == id) {
+
+                System.out.print("Enter New Name: ");
+                studentName[i] = sc.nextLine();
+
+                System.out.print("Enter New Mark: ");
+                studentMark[i] = sc.nextDouble();
+
+                System.out.println("Student updated successfully!");
+
+                return;
+            }
+        }
+
+        System.out.println("Student ID not found!");
+    }
+
+    // Display Students
+    static void displayStudents() {
+
+        if (count == 0) {
+            System.out.println("No students available!");
+            return;
+        }
+
+        System.out.println("\n===== Student Records =====");
+
+        for (int i = 0; i < count; i++) {
+
+            System.out.println("ID   : " + studentId[i]);
+            System.out.println("Name : " + studentName[i]);
+            System.out.println("Mark : " + studentMark[i]);
+            System.out.println("---------------------------");
+        }
+    }
+
+    // Main method
+    public static void main(String[] args) {
+
+        while (true) {
+
+            System.out.println("\n===== Student Management System =====");
+            System.out.println("1. Add Student");
+            System.out.println("2. Search Student");
+            System.out.println("3. Update Student");
+            System.out.println("4. Display Students");
+            System.out.println("5. Exit");
+
+            System.out.print("Enter your choice: ");
+            int choice = sc.nextInt();
+
+            switch (choice) {
+
+                case 1:
+                    addStudent();
+                    break;
+
+                case 2:
+                    searchStudent();
+                    break;
+
+                case 3:
+                    updateStudent();
+                    break;
+
+                case 4:
+                    displayStudents();
+                    break;
+
+                case 5:
+                    System.out.println("Thank you!");
+                    sc.close();
+                    return;
+
+                default:
+                    System.out.println("Invalid choice!");
+            }
+        }
+    }
+}
